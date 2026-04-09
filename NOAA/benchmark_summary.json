@@ -1,0 +1,134 @@
+{
+  "dataset_name": "NOAA Ship Trajectory Benchmark",
+  "source": "NOAA AIS",
+  "month": "2025-03",
+  "generated_on_utc": "2026-03-29",
+  "config": {
+    "observation_window_minutes": 10,
+    "prediction_window_minutes": 10,
+    "resample_interval_seconds": 20,
+    "history_points": 30,
+    "future_points": 30,
+    "partition_count": 64
+  },
+  "raw_data": {
+    "raw_daily_file_count": 31,
+    "standardized_daily_file_count": 31,
+    "filtered_daily_file_count": 31,
+    "raw_total_bytes": 6810103475
+  },
+  "integrity_checks": {
+    "raw_days_complete": true,
+    "stage_01_daily_outputs_complete": true,
+    "stage_02_daily_outputs_complete": true,
+    "stage_03_to_12_partition_outputs_complete": true,
+    "benchmark_core_partitions_complete": true,
+    "benchmark_full_partitions_complete": true,
+    "benchmark_export_partition_summaries_complete": true,
+    "notes": [
+      "Stage 08 was interrupted during the first run and later resumed successfully.",
+      "The Stage 08 partition outputs are complete, but a single aggregated data_interim/08_resampled_20s/summary.json was not regenerated.",
+      "Downstream stages 09-13 completed successfully and the final benchmark is structurally complete."
+    ]
+  },
+  "stage_summaries": {
+    "03_sort_dedup": {
+      "rows_before": 239536205,
+      "rows_after": 239454846,
+      "same_mmsi_timestamp_rows_removed": 81359,
+      "exact_duplicate_rows_removed": 0,
+      "partition_count": 64,
+      "unique_mmsi_approx_sum_over_partitions": 41205
+    },
+    "04_shiptype_speed_filter": {
+      "rows_before": 239454846,
+      "rows_after": 239160583,
+      "hard_cap_removed": 1487,
+      "soft_cap_removed": 292776
+    },
+    "05_segment_tracks": {
+      "rows_after": 239160583,
+      "segments": 4161045,
+      "dropped_non_positive_dt_rows": 0,
+      "partition_count": 64
+    },
+    "06_remove_anchorage": {
+      "all_motion_rows": 239160583,
+      "underway_only_rows": 14828725,
+      "excluded_segments": 2353088,
+      "kept_segments": 1807957
+    },
+    "07_interpolate_short_gaps": {
+      "short_gaps": 11105675,
+      "medium_gaps": 1541241,
+      "long_gaps": 326025,
+      "inserted_points": 37417293
+    },
+    "08_resample_20s": {
+      "partition_outputs": 64,
+      "partition_summary_files": 34,
+      "rows_after_inferred_from_stage_09": 42926708,
+      "segments_after": "not aggregated because the first interrupted run did not produce summary files for partitions 000-029"
+    },
+    "09_second_pass_anomaly_check": {
+      "partition_summary_files": 64,
+      "rows_after": 42926708,
+      "removed_points": 0
+    },
+    "10_filter_short_segments": {
+      "partition_summary_files": 64,
+      "rows_after": 25826184,
+      "segments_after": 101088
+    },
+    "11_make_sliding_windows": {
+      "partition_summary_files": 64,
+      "samples_after": 4013654
+    },
+    "12_compute_quality_labels": {
+      "partition_summary_files": 64,
+      "samples": 4013654,
+      "quality_tier_counts": {
+        "core": 3550953,
+        "full_only": 446240,
+        "drop": 16461
+      },
+      "weighted_means": {
+        "mean_interp_ratio_hist": 0.04452653367729257,
+        "mean_interp_ratio_fut": 0.044495365071329035,
+        "mean_interp_ratio_total": 0.04451094937431079,
+        "mean_grid_interp_ratio_total": 0.9415482126760305
+      }
+    }
+  },
+  "benchmark": {
+    "total_bytes": 5429926265,
+    "shard_file_count": 384,
+    "export_summary_file_count": 64,
+    "split_counts": {
+      "core_train": 2853869,
+      "core_val": 350486,
+      "core_test": 346598,
+      "full_train": 3210217,
+      "full_val": 396863,
+      "full_test": 390113
+    },
+    "derived_totals": {
+      "core_total": 3550953,
+      "full_total": 3997193,
+      "full_only_extra_over_core": 446240
+    },
+    "expected_structure": {
+      "core_train_partitions": 64,
+      "core_val_partitions": 64,
+      "core_test_partitions": 64,
+      "full_train_partitions": 64,
+      "full_val_partitions": 64,
+      "full_test_partitions": 64
+    }
+  },
+  "artifacts": {
+    "segment_summary_file": "data_interim/05_segmented/segment_summary.csv.gz",
+    "segment_labels_file": "data_interim/06_underway_only/segment_labels.csv.gz",
+    "benchmark_root": "benchmark"
+  }
+}

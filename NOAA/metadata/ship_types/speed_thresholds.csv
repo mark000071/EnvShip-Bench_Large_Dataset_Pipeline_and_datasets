@@ -1,0 +1,8 @@
+ship_type,max_speed_knots,notes
+unknown,40,default conservative cap
+cargo,35,placeholder v1 cap
+tanker,30,placeholder v1 cap
+passenger,40,placeholder v1 cap
+fishing,25,placeholder v1 cap
+tug,20,placeholder v1 cap
+pleasure,45,placeholder v1 cap

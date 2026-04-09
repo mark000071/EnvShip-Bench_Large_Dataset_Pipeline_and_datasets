@@ -1,0 +1,234 @@
+Method Summary for EnvShip-Bench and clean_ship_core_lite_v1
+
+This document summarizes the methodological design of the current project in a paper-ready form, with particular emphasis on the construction of clean_ship_core_lite_v1 and its environment-aware and social-context-aware extensions. The text is intended to support the writing of an ACM Multimedia dataset-track submission and can be directly adapted into the Method, Dataset Construction, or Benchmark Design sections of the paper.
+
+1. Project Scope and Design Philosophy
+
+The project is organized as a hierarchical benchmark construction pipeline for short-term vessel trajectory prediction. The overall objective is to move maritime forecasting from raw trajectory sequence modeling toward a more rigorous setting with standardized protocols, explicit quality control, and extensible contextual annotations. To this end, the project contains three tightly connected layers.
+
+First, a large-scale core benchmark is built from raw AIS data released by the Danish Maritime Authority (DMA). This benchmark enforces a unified prediction protocol and supports standardized model training and evaluation at scale.
+
+Second, a quality-first compact benchmark, named clean_ship_core_lite_v1, is derived from the large-scale core benchmark. This subset is not a random sample. Instead, it is designed to retain high-quality, highly interpretable, and method-development-friendly samples through stricter filtering and representative stratified sampling.
+
+Third, the clean subset is augmented with two context packages: an environment package and a target-centric social package. These extensions preserve the original split membership and prediction protocol while enriching each sample with geographic context and nearby-vessel interaction descriptors.
+
+Taken together, the project supports three levels of research: trajectory-only prediction, environment-aware prediction, and interaction-aware prediction.
+
+2. Unified Forecasting Protocol
+
+All benchmark construction stages are governed by a single forecasting protocol. Each sample consists of 10 minutes of observation and 10 minutes of prediction, uniformly sampled at 20-second intervals. This results in 30 historical points and 30 future points per sample. The prediction target is the future 30-point trajectory sequence, and the primary evaluation unit is meter-level spatial error.
+
+The benchmark is designed in a vessel-centric local planar coordinate system. For every sample, the final historical point serves as the local origin, and both historical and future trajectories are represented as relative positions in meters. This design eliminates direct dependence on geographic coordinates during model training and evaluation, reduces latitude-dependent scale distortion, and improves cross-region comparability.
+
+3. Large-Scale Core Benchmark Construction
+
+3.1 Raw AIS Standardization
+
+The benchmark construction begins from DMA raw AIS CSV files. Only task-relevant fields are retained. Dynamic fields include MMSI, UTC timestamp, latitude, longitude, SOG, COG, heading, and navigation status. Static fields include ship type, length, width, and optionally draught and IMO when available.
+
+All records are standardized into a unified schema. Timestamps are converted to UTC datetimes, positions are retained in WGS84, speeds are represented in knots, and angular attributes are stored as floating-point values. AIS sentinel values are mapped to missing values rather than treated as valid observations. This includes unavailable or default encodings in SOG, COG, heading, latitude, and longitude.
+
+3.2 Hard Validity Filtering and Deduplication
+
+The first stage of data cleaning applies only indisputable validity checks. Records are removed if MMSI, timestamp, or geographic coordinates are missing, or if latitude and longitude lie outside valid geographic ranges. Negative SOG values are discarded, whereas invalid COG and heading values are set to missing instead of causing the full record to be removed.
+
+The data are then sorted by MMSI and UTC timestamp. Duplicate reports with the same vessel and timestamp are resolved by keeping the record with fewer missing fields; ties are broken by retaining the last occurrence. This stage removes repeated transmissions and reduces disorder in the raw feed.
+
+3.3 Physical Filtering by Ship Type
+
+To prevent clearly unrealistic motion patterns from propagating into the benchmark, the pipeline uses a two-level speed filter. A global hard upper bound removes records with obviously implausible SOG values. On top of this, ship-type-aware soft thresholds are applied to major vessel groups. The purpose is not to aggressively remove rare high-speed vessels, but to suppress physically inconsistent reports while preserving cross-type diversity.
+
+3.4 Trajectory Segmentation
+
+Continuous trajectories are constructed independently for each MMSI. A segment boundary is inserted when one of the following conditions is met: the time gap between consecutive reports exceeds 10 minutes, the implied speed between two consecutive positions is incompatible with the reported motion and vessel type, or temporal ordering remains non-positive after sorting.
+
+Importantly, the pipeline prefers segmentation over blunt record removal. This preserves valid portions of trajectories and reduces the destructive impact of isolated outliers.
+
+3.5 Underway Filtering
+
+The released core benchmark focuses on meaningful motion rather than static occupancy. Trajectory segments dominated by anchoring, mooring, or near-zero movement are therefore excluded from the main benchmark. In particular, windows with prolonged low-speed behavior or negligible displacement are removed from the core release. This prevents the final benchmark from being dominated by trivial nearly stationary samples.
+
+3.6 Gap Handling, Resampling, and Window Generation
+
+Time gaps within a trajectory segment are categorized into short, medium, and long gaps. Only short gaps are interpolated. Position interpolation is performed in a local planar coordinate system, SOG is linearly interpolated when appropriate, and angular variables are interpolated on the circle. Medium and long gaps are not bridged into the core benchmark.
+
+After gap handling, valid segments are resampled onto a global 20-second UTC grid. A second-pass anomaly check is then performed to remove residual geometric outliers. Only sufficiently long segments are retained. Finally, a sliding-window procedure is applied to generate fixed-length 30-to-30 forecasting samples under a shared protocol.
+
+3.7 Window-Level Quality Labels
+
+At the sample level, the benchmark computes interpolation ratios, displacement statistics, and consistency flags. These labels are used to split the release into a stricter core version and a more inclusive full version. The core subset serves as the principal benchmark for clean short-term trajectory forecasting.
+
+4. clean_ship_core_lite_v1: A Quality-First Compact Benchmark
+
+4.1 Motivation
+
+Although the large-scale core benchmark is suitable for training large-capacity models, its scale and diversity can slow down rapid experimentation and make ablation studies less controlled. For this reason, the project introduces clean_ship_core_lite_v1, a compact benchmark designed for efficient experimentation, reproducible comparisons, and context-rich downstream studies.
+
+This subset is not intended to maximize data volume. Instead, it prioritizes high-quality and structurally clean vessel motion patterns that are well suited for method development, controlled benchmarking, and context augmentation.
+
+4.2 Vessel-Type Scope
+
+The compact benchmark focuses on the two major vessel groups that provide the most stable and interpretable short-term forecasting behavior in the current release:
+
+- cargo_tanker
+- passenger_ferry
+
+The following groups are explicitly excluded:
+
+- other_unknown
+- fishing
+- tug_service
+- sailing_leisure
+
+This design sacrifices some type diversity in exchange for cleaner motion regularity and lower ambiguity. In the current version, the goal is not to represent every maritime behavior, but to provide a clean and practically useful benchmark subset.
+
+4.3 Fine-Grained Motion Quality Screening
+
+clean_ship_core_lite_v1 introduces much stricter sample-level quality control than the large-scale core benchmark. Starting from benchmark/core, each candidate sample is analyzed through a set of trajectory geometry and motion-consistency metrics computed from both historical and future trajectories. These metrics include:
+
+- path length and net displacement
+- trajectory efficiency
+- historical median speed
+- speed coefficient of variation
+- non-zero motion ratio
+- pause ratio
+- mean and maximum turning angle
+- step outlier ratio
+- bridge turning angle between the end of history and the start of the future sequence
+- consistency between historical COG and actual motion direction
+- consistency between heading and COG
+- true interpolation ratio
+
+Samples are then filtered by explicit thresholds designed to remove locally unstable, highly noisy, weakly self-consistent, or overly interpolated windows. Examples include overly low or high average speed, insufficient trajectory efficiency, excessive turning, unstable speed patterns, high pause ratios, and poor agreement between directional attributes and geometric motion.
+
+The practical effect of this stage is that clean_ship_core_lite_v1 contains smoother, more self-consistent, and more interpretable short-term vessel motion than the parent benchmark.
+
+4.4 Quality and Difficulty Scoring
+
+To rank the surviving candidates, the pipeline computes two heuristic scores.
+
+The quality score estimates how clean and benchmark-friendly a sample is. It favors high historical and future trajectory efficiency, high future linearity, low speed variability, low pause ratio, low interpolation, low step-level outlier ratio, and low disagreement between directional fields and actual geometric motion. It also mildly favors moderate operating speeds over extremely slow or extremely fast behavior.
+
+The difficulty score estimates local forecast complexity. It increases with future turning, efficiency loss, bridge turning, pauses, outlier ratio, and interpolation burden.
+
+Samples are ranked primarily by descending quality score and secondarily by ascending difficulty score. This makes the released compact benchmark biased toward stable and reliable samples, while still preserving a controlled amount of motion diversity.
+
+4.5 Representative Stratified Sampling
+
+The compact release is not produced by uniform random sampling. Instead, candidates are organized into strata defined by:
+
+- ship group
+- speed bin
+- motion-scale bin
+
+The speed bins partition samples by average motion magnitude, while the motion-scale bins capture coarse future displacement regimes. Weighted stratum quotas are then computed to balance representativeness and practicality. This avoids a degenerate outcome in which the subset is dominated entirely by the most common operating regime.
+
+Within each stratum, candidates are sorted by quality score and difficulty score, and selected subject to diversity constraints.
+
+4.6 Redundancy Control
+
+Sliding-window generation creates high overlap between neighboring samples. Without additional constraints, a compact release would be overly concentrated on a small number of long trajectories. To reduce this problem, the construction process limits:
+
+- the number of retained samples per MMSI
+- the number of retained samples per trajectory segment
+- the temporal proximity between retained windows from the same segment
+
+These constraints materially improve sample diversity and make the subset more suitable for fair model comparison.
+
+4.7 Resulting Role in the Benchmark
+
+clean_ship_core_lite_v1 should be viewed as a quality-first derivative benchmark rather than a simple reduced-scale version of the full release. It preserves the exact forecasting protocol of the full benchmark, but replaces scale with sample cleanliness, reproducibility, and compatibility with context modeling.
+
+For a multimedia and dataset-track audience, this subset is especially valuable because it provides a stable basis for analyzing how map context and social context affect trajectory prediction under controlled conditions.
+
+5. Environment Context Package: environment_v1
+
+The first extension built on top of clean_ship_core_lite_v1 is environment_v1, which enriches each sample with local geographic context.
+
+5.1 Geographic Anchor Recovery
+
+Because the core trajectory benchmark is represented in local relative coordinates, environment construction begins by recovering the absolute geographic anchor of each sample. The anchor corresponds to the end of the observation window and acts as the reference point for all downstream map extraction and local alignment.
+
+5.2 Local Patch Construction
+
+Around each anchor, the pipeline constructs a vessel-centered local map patch with a fixed metric radius. The local context is aligned with the sample-centric coordinate frame so that the environmental features can be consumed together with the trajectory.
+
+5.3 Multi-Form Environment Representation
+
+Environment_v1 releases context in three mutually complementary forms:
+
+- vectorized shoreline and waterfront geometry
+- lightweight rasterized binary masks
+- compact numeric descriptors
+
+The vector layer preserves geometric detail and is suitable for graph-based or vector-map encoders. The raster layer supports convolutional or vision-style models. The numeric descriptors provide a low-cost alternative for lightweight models and ablation studies.
+
+Representative numeric features include nearest shoreline distance, nearest waterfront distance, segment counts within multiple radii, total local shoreline length, local waterfront length, and patch occupancy statistics.
+
+5.4 Scene Grouping
+
+To support scene-aware analysis, the project further derives coarse scenario categories such as harbor-port, nearshore channel, coastal route, and offshore route. These labels are not meant to replace geometric context, but to provide a compact semantic grouping for error analysis and cross-scene comparison.
+
+6. Target-Centric Social Context Package: social_env_v1
+
+The second extension built on top of clean_ship_core_lite_v1 is social_env_v1, which provides synchronized nearby-vessel context for each target sample.
+
+6.1 Construction Principle
+
+Instead of reconstructing multi-vessel scenes from scratch, the current version adopts a target-centric design. For each sample, the pipeline returns to globally referenced stage-10 trajectories and retrieves nearby vessels at the historical end timestamp. Neighboring vessels are searched within a 3 km radius around the target vessel.
+
+6.2 Exported Social Attributes
+
+For each target sample, the package exports:
+
+- number of neighboring vessels
+- density category
+- neighbor MMSI and segment identifiers
+- neighbor ship types
+- neighbor distances
+- relative historical trajectories over the same observation horizon
+- neighbor SOG, COG, and heading histories
+- relative velocity components
+- CPA and TCPA descriptors
+
+These features allow a model to condition its prediction on explicit nearby-vessel motion rather than only on the target vessel’s own trajectory.
+
+6.3 Interpretation of the Social Package
+
+It is important to describe this extension carefully. social_env_v1 is a synchronized target-centric social context package, not yet a fully scene-centric social benchmark in the sense of pedestrian datasets such as SDD or ETH/UCY. The package retains all samples from clean_ship_core_lite_v1 and marks interaction-rich cases through dedicated flags. Consequently, it is best positioned as an interaction-aware extension that supports controlled analysis of nearby-vessel effects under a fixed forecasting protocol.
+
+7. Scientific Contribution of the Current Release
+
+The current project makes three methodological contributions that are directly visible in the codebase and released artifacts.
+
+First, it establishes a large-scale, standardized vessel trajectory prediction benchmark from raw DMA AIS data under a unified and explicit protocol. This addresses the common reproducibility problem in prior maritime prediction work, where preprocessing rules and evaluation settings often differ across studies.
+
+Second, it introduces a quality-first compact benchmark, clean_ship_core_lite_v1, that is specifically engineered for reliable experimentation. Rather than serving as a random miniature of the full release, this subset is curated through physically grounded screening, motion-quality scoring, representative stratified sampling, and redundancy control.
+
+Third, it extends the compact benchmark with environment and social context packages. These extensions are especially important for future context-aware maritime forecasting research, because they move the dataset beyond trajectory-only learning while preserving sample-level synchronization and split consistency.
+
+8. Recommended Positioning in the Paper
+
+For an MM dataset-track submission, the project should be positioned as a benchmark paper with a strong construction methodology and a context-enriched compact subset. The safest and most accurate framing is:
+
+- EnvShip-Bench as the large-scale standardized trajectory benchmark
+- clean_ship_core_lite_v1 as the quality-first compact benchmark for reproducible experimentation
+- environment_v1 and social_env_v1 as context-enriched extensions of the compact benchmark
+
+This framing is better than claiming that every released benchmark component is jointly environment-aware and social-aware at the same scale. The current implementation clearly supports context-aware research, but the environment and social context are most fully developed on top of the clean compact subset rather than the entire large-scale benchmark.
+
+9. Writing Notes for the Paper
+
+When drafting the paper, several claims should be stated carefully.
+
+1. The currently released benchmark and compact subset are clearly DMA-backed. Unless NOAA data are explicitly integrated into the released benchmark results, the paper should avoid claiming that the present benchmark is jointly built from DMA and NOAA.
+
+2. The social extension should not yet be overstated as a large-scale multi-vessel scene benchmark. It is more accurately described as a synchronized target-centric interaction context layer.
+
+3. The environment extension should be described as a clean-subset augmentation rather than an intrinsic attribute of every sample in the full core benchmark.
+
+4. clean_ship_core_lite_v1 should be emphasized as one of the main methodological innovations of the work, because it operationalizes benchmark quality, representative coverage, and reproducibility through an explicit and auditable selection process.
+
+10. One-Paragraph Paper Summary
+
+EnvShip-Bench is a hierarchical vessel trajectory prediction benchmark built from raw DMA AIS data under a unified 10-minute observation, 10-minute prediction, and 20-second resampling protocol. The project first constructs a large-scale standardized benchmark through schema normalization, validity filtering, physical plausibility checks, trajectory segmentation, interpolation control, resampling, window generation, and quality labeling. It then derives clean_ship_core_lite_v1, a quality-first compact benchmark curated through vessel-type restriction, fine-grained motion screening, heuristic quality and difficulty scoring, representative stratified sampling, and redundancy control. Finally, it enriches this clean benchmark with environment_v1 and social_env_v1, which provide recovered geographic anchors, map-aligned environmental context, and synchronized target-centric nearby-vessel interaction descriptors. Together, these components form a reproducible and extensible foundation for trajectory-only, environment-aware, and interaction-aware maritime forecasting research.

@@ -1,0 +1,232 @@
+{
+  "split": "val",
+  "target": 2400,
+  "selected": 2400,
+  "exported_rows": 2400,
+  "unique_mmsi": 237,
+  "unique_segments": 1106,
+  "ship_group_counts": {
+    "cargo_tanker": 2335,
+    "passenger_ferry": 65
+  },
+  "speed_bin_counts": {
+    "10_15": 1517,
+    "5_10": 789,
+    "15_20": 80,
+    "gt20": 1,
+    "0_5": 13
+  },
+  "motion_bin_counts": {
+    "high": 2383,
+    "mid": 17
+  },
+  "filter_counts": {
+    "hist_cog_motion_mae": 270400,
+    "ship_group_excluded": 180311,
+    "interp_ratio_side": 2931,
+    "interp_ratio_total": 538,
+    "bridge_turn": 4077,
+    "future_linearity": 4277,
+    "fut_efficiency": 2039,
+    "hist_efficiency": 728,
+    "hist_turn_max": 419,
+    "fut_turn_mean": 281,
+    "fut_turn_max": 451,
+    "hist_speed_variability": 671,
+    "hist_turn_mean": 218,
+    "avg_speed_out_of_range": 3633,
+    "low_hist_median_speed": 1040,
+    "hist_heading_cog_mae": 170,
+    "fut_nonzero_ratio": 22,
+    "fut_pause_ratio": 4,
+    "step_outlier_ratio": 6
+  },
+  "input_rows": 521170,
+  "eligible_candidates": 48954,
+  "selection_report": {
+    "split": "val",
+    "target": 2400,
+    "eligible_candidates": 48954,
+    "selected": 2400,
+    "fill_added": 224,
+    "strata_report": {
+      "cargo_tanker|0_5|high": {
+        "eligible": 2,
+        "quota": 0,
+        "selected": 0,
+        "mean_quality_score": 86.6291,
+        "mean_difficulty_score": 4.0241
+      },
+      "cargo_tanker|0_5|low": {
+        "eligible": 3,
+        "quota": 0,
+        "selected": 0,
+        "mean_quality_score": 82.0976,
+        "mean_difficulty_score": 9.5017
+      },
+      "cargo_tanker|0_5|mid": {
+        "eligible": 294,
+        "quota": 13,
+        "selected": 13,
+        "mean_quality_score": 86.5527,
+        "mean_difficulty_score": 5.8784
+      },
+      "cargo_tanker|10_15|high": {
+        "eligible": 26170,
+        "quota": 1262,
+        "selected": 1262,
+        "mean_quality_score": 95.1953,
+        "mean_difficulty_score": 4.4261
+      },
+      "cargo_tanker|15_20|high": {
+        "eligible": 1014,
+        "quota": 52,
+        "selected": 52,
+        "mean_quality_score": 92.9753,
+        "mean_difficulty_score": 4.6934
+      },
+      "cargo_tanker|5_10|high": {
+        "eligible": 19113,
+        "quota": 945,
+        "selected": 780,
+        "mean_quality_score": 93.2682,
+        "mean_difficulty_score": 4.5384
+      },
+      "cargo_tanker|5_10|mid": {
+        "eligible": 147,
+        "quota": 15,
+        "selected": 4,
+        "mean_quality_score": 88.4156,
+        "mean_difficulty_score": 6.3038
+      },
+      "passenger_ferry|0_5|mid": {
+        "eligible": 8,
+        "quota": 0,
+        "selected": 0,
+        "mean_quality_score": 83.0993,
+        "mean_difficulty_score": 5.6353
+      },
+      "passenger_ferry|10_15|high": {
+        "eligible": 906,
+        "quota": 51,
+        "selected": 39,
+        "mean_quality_score": 93.1424,
+        "mean_difficulty_score": 5.6194
+      },
+      "passenger_ferry|15_20|high": {
+        "eligible": 1136,
+        "quota": 52,
+        "selected": 20,
+        "mean_quality_score": 90.8886,
+        "mean_difficulty_score": 5.0547
+      },
+      "passenger_ferry|5_10|high": {
+        "eligible": 139,
+        "quota": 9,
+        "selected": 5,
+        "mean_quality_score": 93.932,
+        "mean_difficulty_score": 4.0937
+      },
+      "passenger_ferry|5_10|mid": {
+        "eligible": 1,
+        "quota": 0,
+        "selected": 0,
+        "mean_quality_score": 78.0686,
+        "mean_difficulty_score": 6.8447
+      },
+      "passenger_ferry|gt20|high": {
+        "eligible": 21,
+        "quota": 1,
+        "selected": 1,
+        "mean_quality_score": 91.4455,
+        "mean_difficulty_score": 3.661
+      }
+    }
+  },
+  "quality_stats": {
+    "quality_score": {
+      "mean": 95.7438,
+      "median": 96.2045,
+      "p90": 97.9716,
+      "min": 76.8335,
+      "max": 100.1129
+    },
+    "difficulty_score": {
+      "mean": 3.9281,
+      "median": 3.4691,
+      "p90": 5.1935,
+      "min": 2.6342,
+      "max": 16.2394
+    },
+    "avg_speed_knots": {
+      "mean": 10.8514,
+      "median": 10.7946,
+      "p90": 13.2543,
+      "min": 4.1633,
+      "max": 20.8686
+    },
+    "hist_speed_cv": {
+      "mean": 0.0313,
+      "median": 0.0284,
+      "p90": 0.0476,
+      "min": 0.0021,
+      "max": 0.3402
+    },
+    "hist_efficiency": {
+      "mean": 0.9982,
+      "median": 0.9999,
+      "p90": 1.0,
+      "min": 0.9181,
+      "max": 1.0
+    },
+    "fut_efficiency": {
+      "mean": 0.9996,
+      "median": 0.9999,
+      "p90": 1.0,
+      "min": 0.9743,
+      "max": 1.0
+    },
+    "future_linearity": {
+      "mean": 0.9665,
+      "median": 0.9666,
+      "p90": 0.9682,
+      "min": 0.9419,
+      "max": 0.9982
+    },
+    "bridge_turn_deg": {
+      "mean": 1.7077,
+      "median": 0.5924,
+      "p90": 3.6973,
+      "min": 0.0003,
+      "max": 29.9284
+    },
+    "hist_turn_mean_abs_deg": {
+      "mean": 0.6302,
+      "median": 0.4819,
+      "p90": 1.2128,
+      "min": 0.0511,
+      "max": 4.3369
+    },
+    "fut_turn_mean_abs_deg": {
+      "mean": 0.5462,
+      "median": 0.4249,
+      "p90": 1.0037,
+      "min": 0.0547,
+      "max": 5.8709
+    },
+    "interp_ratio_total": {
+      "mean": 0.0009,
+      "median": 0.0,
+      "p90": 0.0,
+      "min": 0.0,
+      "max": 0.0833
+    },
+    "hard_filter_margin": {
+      "mean": 0.0264,
+      "median": 0.0266,
+      "p90": 0.0282,
+      "min": 0.0,
+      "max": 0.0582
+    }
+  }
+}

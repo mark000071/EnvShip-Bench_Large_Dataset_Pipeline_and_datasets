@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this repository or the released benchmark, please cite the EnvShip-Bench paper and this code release."
+title: "Ship-Env: Code Release for EnvShip-Bench"
+type: software
+authors:
+  - family-names: "mark000071"
+date-released: 2026-04-04
+repository-code: "https://github.com/mark000071/EnvShip-Bench_Large_Dataset_Pipeline_and_datasets"
+url: "https://github.com/mark000071/EnvShip-Bench_Large_Dataset_Pipeline_and_datasets"
+repository-artifact: "https://huggingface.co/datasets/mark000071/EnvShip-Bench_An_Environment-Enhanced_Benchmark_for_Short-Term_Vessel_Trajectory_Prediction"
+abstract: "Code release for EnvShip-Bench, a DMA-based benchmark for short-term vessel trajectory prediction, including benchmark construction scripts, compact benchmark builders, visualization tools, and companion release materials."
+keywords:
+  - vessel trajectory prediction
+  - AIS
+  - benchmark
+  - maritime forecasting
+  - trajectory forecasting
+  - trajectory prediction
+  - environment-aware prediction
+license: "MIT"
+preferred-citation:
+  type: article
+  title: "EnvShip-Bench: An Environment-Enhanced Benchmark for Short-Term Vessel Trajectory Prediction"
+  authors:
+    - family-names: "mark000071"
+  journal: "MM 2026 Dataset Track (under review)"
+  year: 2026
+  repository: "https://github.com/mark000071/EnvShip-Bench_Large_Dataset_Pipeline_and_datasets"
+  url: "https://huggingface.co/datasets/mark000071/EnvShip-Bench_An_Environment-Enhanced_Benchmark_for_Short-Term_Vessel_Trajectory_Prediction"

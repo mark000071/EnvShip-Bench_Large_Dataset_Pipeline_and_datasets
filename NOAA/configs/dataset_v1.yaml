@@ -1,0 +1,96 @@
+version: v1
+task: short_horizon_ship_trajectory_forecasting
+observation_window_minutes: 10
+prediction_window_minutes: 10
+resample_interval_seconds: 20
+history_points: 30
+future_points: 30
+main_target: future_30_positions
+input_features:
+  - lat
+  - lon
+  - sog
+  - cog
+  - heading
+  - dt
+  - ship_type
+evaluation_unit: meter
+io:
+  chunksize: 200000
+  output_compression: gzip
+  partition_count: 64
+schema:
+  canonical_columns:
+    - mmsi
+    - timestamp_utc
+    - lat
+    - lon
+    - sog
+    - cog
+    - heading
+    - nav_status
+    - ship_type
+    - length
+    - width
+    - draught
+    - imo
+    - source_file
+thresholds:
+  sog_unavailable_knots: 102.2
+  cog_unavailable_degrees: 360.0
+  heading_unavailable_value: 511
+  global_hard_speed_cap_knots: 55.0
+  segmentation_gap_seconds: 600
+  implied_speed_factor: 1.4
+  underway_low_speed_knots: 0.5
+  underway_low_speed_duration_seconds: 300
+  anchor_moored_duration_seconds: 300
+  low_displacement_window_seconds: 1200
+  low_displacement_window_meters: 150.0
+  short_gap_max_seconds: 120
+  medium_gap_max_seconds: 300
+  sog_interp_diff_max_knots: 8.0
+  resample_interval_seconds: 20
+  secondary_anomaly_offset_meters: 200.0
+  secondary_anomaly_speed_margin_knots: 8.0
+  min_resampled_points: 80
+  min_segment_duration_seconds: 1500
+  sliding_window_hist_points: 30
+  sliding_window_fut_points: 30
+  sliding_window_step_points: 5
+  max_unprocessed_gap_seconds: 40
+  min_hist_displacement_meters: 200.0
+  min_fut_displacement_meters: 200.0
+  core_interp_ratio_hist_max: 0.20
+  core_interp_ratio_fut_max: 0.20
+  core_interp_ratio_total_max: 0.15
+ship_type_caps:
+  cargo: 35.0
+  tanker: 35.0
+  bulk: 35.0
+  container: 35.0
+  passenger: 45.0
+  ferry: 45.0
+  fishing: 25.0
+  tug: 20.0
+  service: 20.0
+pipeline:
+  - 01_standardize_fields
+  - 02_basic_filter
+  - 03_sort_dedup
+  - 04_shiptype_speed_filter
+  - 05_segment_tracks
+  - 06_remove_anchorage
+  - 07_interpolate_short_gaps
+  - 08_resample_20s
+  - 09_second_pass_anomaly_check
+  - 10_filter_short_segments
+  - 11_make_sliding_windows
+  - 12_compute_quality_labels
+  - 13_export_benchmark
+constraints:
+  segmentation_gap_seconds: 600
+  max_short_gap_interpolation_seconds: 120
+releases:
+  - core
+  - full

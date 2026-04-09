@@ -1,0 +1,1 @@
+NOAA clean_ship_core_lite_v1 keeps the compact train/val/test split, reports, and sample identifiers in GitHub. The full split shards and context packages are hosted on Hugging Face under NOAA/mini_bench/clean_ship_core_lite_v1.

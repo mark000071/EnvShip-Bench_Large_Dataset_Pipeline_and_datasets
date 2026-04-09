@@ -1,0 +1,21 @@
+{
+  "sample_id": "211635150_000003_r00_c00_00210",
+  "mmsi": 211635150,
+  "segment_id": "211635150_000003_r00_c00",
+  "ship_type": "sailing",
+  "ship_class": "",
+  "quality_tier": "core",
+  "hist_end_ts": "2025-09-01T09:55:40+00:00",
+  "pred_end_ts": "2025-09-01T10:05:40+00:00",
+  "interp_ratio_total": 0.0,
+  "grid_interp_ratio_total": 0.9833333333333332,
+  "hist_displacement_m": 2147.741647460653,
+  "fut_displacement_m": 2189.703756429394,
+  "nearby_ship_count_at_hist_end": 4,
+  "nearby_segment_ids": [
+    "211200960_000003_r00_c00",
+    "211713560_000002_r00_c00",
+    "211300250_000001_r00_c00",
+    "211822060_000001_r00_c00"
+  ]
+}

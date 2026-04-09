@@ -1,0 +1,13 @@
+{
+  "stage": "13_export_benchmark",
+  "source": "aggregated_from_partition_export_summaries",
+  "partition_export_summary_files": 64,
+  "counts": {
+    "core_test": 346598,
+    "core_train": 2853869,
+    "core_val": 350486,
+    "full_test": 390113,
+    "full_train": 3210217,
+    "full_val": 396863
+  }
+}

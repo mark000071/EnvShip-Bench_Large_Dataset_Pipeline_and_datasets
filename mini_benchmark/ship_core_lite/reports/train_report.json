@@ -1,0 +1,669 @@
+{
+  "target": 32000,
+  "selected": 32000,
+  "exported_rows": 32000,
+  "unique_mmsi": 5141,
+  "unique_segments": 21833,
+  "ship_group_counts": {
+    "cargo_tanker": 11651,
+    "sailing_leisure": 5717,
+    "fishing": 5488,
+    "other_unknown": 4373,
+    "passenger_ferry": 2822,
+    "tug_service": 1949
+  },
+  "speed_bin_counts": {
+    "5_10": 11197,
+    "0_5": 9831,
+    "10_15": 7807,
+    "15_20": 2640,
+    "gt20": 525
+  },
+  "motion_bin_counts": {
+    "high": 22500,
+    "mid": 7159,
+    "low": 2341
+  },
+  "turn_bin_counts": {
+    "straight": 21199,
+    "gentle_turn": 6669,
+    "sharp_turn": 4132
+  },
+  "strata_report": {
+    "fishing|5_10|high": {
+      "quota": 1196,
+      "candidate_pool": 7176,
+      "selected": 1196,
+      "turn_counts": {
+        "straight": 6444,
+        "gentle_turn": 475,
+        "sharp_turn": 257
+      }
+    },
+    "fishing|5_10|mid": {
+      "quota": 201,
+      "candidate_pool": 1206,
+      "selected": 201,
+      "turn_counts": {
+        "straight": 915,
+        "gentle_turn": 203,
+        "sharp_turn": 88
+      }
+    },
+    "cargo_tanker|5_10|high": {
+      "quota": 3810,
+      "candidate_pool": 22860,
+      "selected": 3810,
+      "turn_counts": {
+        "straight": 21215,
+        "gentle_turn": 1267,
+        "sharp_turn": 378
+      }
+    },
+    "cargo_tanker|10_15|high": {
+      "quota": 4203,
+      "candidate_pool": 25218,
+      "selected": 4203,
+      "turn_counts": {
+        "straight": 23769,
+        "gentle_turn": 1255,
+        "sharp_turn": 194
+      }
+    },
+    "other_unknown|5_10|high": {
+      "quota": 1315,
+      "candidate_pool": 7890,
+      "selected": 1315,
+      "turn_counts": {
+        "straight": 6838,
+        "sharp_turn": 386,
+        "gentle_turn": 666
+      }
+    },
+    "other_unknown|0_5|mid": {
+      "quota": 599,
+      "candidate_pool": 3594,
+      "selected": 599,
+      "turn_counts": {
+        "straight": 2741,
+        "sharp_turn": 364,
+        "gentle_turn": 489
+      }
+    },
+    "other_unknown|0_5|low": {
+      "quota": 310,
+      "candidate_pool": 1860,
+      "selected": 310,
+      "turn_counts": {
+        "straight": 1275,
+        "gentle_turn": 320,
+        "sharp_turn": 265
+      }
+    },
+    "other_unknown|10_15|high": {
+      "quota": 933,
+      "candidate_pool": 5598,
+      "selected": 933,
+      "turn_counts": {
+        "straight": 4967,
+        "gentle_turn": 503,
+        "sharp_turn": 128
+      }
+    },
+    "other_unknown|0_5|high": {
+      "quota": 239,
+      "candidate_pool": 1434,
+      "selected": 239,
+      "turn_counts": {
+        "sharp_turn": 397,
+        "straight": 858,
+        "gentle_turn": 179
+      }
+    },
+    "other_unknown|5_10|mid": {
+      "quota": 182,
+      "candidate_pool": 1092,
+      "selected": 182,
+      "turn_counts": {
+        "sharp_turn": 145,
+        "straight": 703,
+        "gentle_turn": 244
+      }
+    },
+    "other_unknown|5_10|low": {
+      "quota": 57,
+      "candidate_pool": 247,
+      "selected": 57,
+      "turn_counts": {
+        "straight": 149,
+        "gentle_turn": 65,
+        "sharp_turn": 33
+      }
+    },
+    "cargo_tanker|15_20|high": {
+      "quota": 1206,
+      "candidate_pool": 7236,
+      "selected": 1206,
+      "turn_counts": {
+        "straight": 6830,
+        "gentle_turn": 347,
+        "sharp_turn": 59
+      }
+    },
+    "cargo_tanker|0_5|low": {
+      "quota": 372,
+      "candidate_pool": 2232,
+      "selected": 372,
+      "turn_counts": {
+        "straight": 1859,
+        "gentle_turn": 267,
+        "sharp_turn": 106
+      }
+    },
+    "cargo_tanker|0_5|mid": {
+      "quota": 690,
+      "candidate_pool": 4140,
+      "selected": 690,
+      "turn_counts": {
+        "straight": 3642,
+        "sharp_turn": 179,
+        "gentle_turn": 319
+      }
+    },
+    "cargo_tanker|0_5|high": {
+      "quota": 280,
+      "candidate_pool": 1680,
+      "selected": 280,
+      "turn_counts": {
+        "straight": 1321,
+        "gentle_turn": 203,
+        "sharp_turn": 156
+      }
+    },
+    "cargo_tanker|5_10|mid": {
+      "quota": 204,
+      "candidate_pool": 1224,
+      "selected": 204,
+      "turn_counts": {
+        "straight": 1009,
+        "gentle_turn": 183,
+        "sharp_turn": 32
+      }
+    },
+    "passenger_ferry|10_15|high": {
+      "quota": 1025,
+      "candidate_pool": 6150,
+      "selected": 1025,
+      "turn_counts": {
+        "straight": 5690,
+        "gentle_turn": 396,
+        "sharp_turn": 64
+      }
+    },
+    "passenger_ferry|15_20|high": {
+      "quota": 1035,
+      "candidate_pool": 6210,
+      "selected": 770,
+      "turn_counts": {
+        "straight": 5766,
+        "sharp_turn": 64,
+        "gentle_turn": 380
+      }
+    },
+    "passenger_ferry|5_10|high": {
+      "quota": 544,
+      "candidate_pool": 3264,
+      "selected": 544,
+      "turn_counts": {
+        "straight": 2776,
+        "gentle_turn": 340,
+        "sharp_turn": 148
+      }
+    },
+    "passenger_ferry|5_10|mid": {
+      "quota": 89,
+      "candidate_pool": 534,
+      "selected": 89,
+      "turn_counts": {
+        "gentle_turn": 112,
+        "straight": 342,
+        "sharp_turn": 80
+      }
+    },
+    "passenger_ferry|0_5|mid": {
+      "quota": 158,
+      "candidate_pool": 948,
+      "selected": 158,
+      "turn_counts": {
+        "sharp_turn": 223,
+        "straight": 508,
+        "gentle_turn": 217
+      }
+    },
+    "passenger_ferry|0_5|low": {
+      "quota": 100,
+      "candidate_pool": 600,
+      "selected": 100,
+      "turn_counts": {
+        "straight": 273,
+        "sharp_turn": 158,
+        "gentle_turn": 169
+      }
+    },
+    "sailing_leisure|5_10|high": {
+      "quota": 2021,
+      "candidate_pool": 12126,
+      "selected": 2021,
+      "turn_counts": {
+        "straight": 10162,
+        "gentle_turn": 1312,
+        "sharp_turn": 652
+      }
+    },
+    "sailing_leisure|gt20|high": {
+      "quota": 117,
+      "candidate_pool": 702,
+      "selected": 117,
+      "turn_counts": {
+        "straight": 601,
+        "gentle_turn": 83,
+        "sharp_turn": 18
+      }
+    },
+    "sailing_leisure|10_15|high": {
+      "quota": 281,
+      "candidate_pool": 1686,
+      "selected": 281,
+      "turn_counts": {
+        "straight": 1399,
+        "gentle_turn": 194,
+        "sharp_turn": 93
+      }
+    },
+    "sailing_leisure|15_20|high": {
+      "quota": 135,
+      "candidate_pool": 810,
+      "selected": 135,
+      "turn_counts": {
+        "straight": 603,
+        "sharp_turn": 69,
+        "gentle_turn": 138
+      }
+    },
+    "sailing_leisure|0_5|mid": {
+      "quota": 1658,
+      "candidate_pool": 9948,
+      "selected": 1658,
+      "turn_counts": {
+        "straight": 7190,
+        "sharp_turn": 1164,
+        "gentle_turn": 1594
+      }
+    },
+    "sailing_leisure|0_5|high": {
+      "quota": 690,
+      "candidate_pool": 4140,
+      "selected": 690,
+      "turn_counts": {
+        "gentle_turn": 772,
+        "straight": 2321,
+        "sharp_turn": 1047
+      }
+    },
+    "sailing_leisure|5_10|mid": {
+      "quota": 371,
+      "candidate_pool": 2226,
+      "selected": 371,
+      "turn_counts": {
+        "straight": 1730,
+        "gentle_turn": 385,
+        "sharp_turn": 111
+      }
+    },
+    "sailing_leisure|0_5|low": {
+      "quota": 368,
+      "candidate_pool": 2208,
+      "selected": 368,
+      "turn_counts": {
+        "straight": 1366,
+        "gentle_turn": 465,
+        "sharp_turn": 377
+      }
+    },
+    "fishing|0_5|mid": {
+      "quota": 2364,
+      "candidate_pool": 14184,
+      "selected": 2364,
+      "turn_counts": {
+        "sharp_turn": 1012,
+        "straight": 11191,
+        "gentle_turn": 1981
+      }
+    },
+    "fishing|0_5|low": {
+      "quota": 889,
+      "candidate_pool": 5334,
+      "selected": 889,
+      "turn_counts": {
+        "straight": 4023,
+        "sharp_turn": 545,
+        "gentle_turn": 766
+      }
+    },
+    "fishing|0_5|high": {
+      "quota": 295,
+      "candidate_pool": 1770,
+      "selected": 295,
+      "turn_counts": {
+        "straight": 750,
+        "sharp_turn": 605,
+        "gentle_turn": 415
+      }
+    },
+    "other_unknown|15_20|high": {
+      "quota": 451,
+      "candidate_pool": 2706,
+      "selected": 451,
+      "turn_counts": {
+        "straight": 2336,
+        "gentle_turn": 279,
+        "sharp_turn": 91
+      }
+    },
+    "other_unknown|gt20|high": {
+      "quota": 242,
+      "candidate_pool": 1452,
+      "selected": 242,
+      "turn_counts": {
+        "straight": 1306,
+        "sharp_turn": 20,
+        "gentle_turn": 126
+      }
+    },
+    "other_unknown|10_15|mid": {
+      "quota": 38,
+      "candidate_pool": 110,
+      "selected": 38,
+      "turn_counts": {
+        "gentle_turn": 32,
+        "straight": 62,
+        "sharp_turn": 16
+      }
+    },
+    "tug_service|5_10|high": {
+      "quota": 838,
+      "candidate_pool": 5028,
+      "selected": 838,
+      "turn_counts": {
+        "gentle_turn": 336,
+        "straight": 4561,
+        "sharp_turn": 131
+      }
+    },
+    "tug_service|0_5|mid": {
+      "quota": 477,
+      "candidate_pool": 2862,
+      "selected": 477,
+      "turn_counts": {
+        "straight": 2437,
+        "sharp_turn": 175,
+        "gentle_turn": 250
+      }
+    },
+    "passenger_ferry|0_5|high": {
+      "quota": 82,
+      "candidate_pool": 492,
+      "selected": 82,
+      "turn_counts": {
+        "gentle_turn": 124,
+        "sharp_turn": 223,
+        "straight": 145
+      }
+    },
+    "tug_service|10_15|high": {
+      "quota": 237,
+      "candidate_pool": 1422,
+      "selected": 237,
+      "turn_counts": {
+        "straight": 1238,
+        "gentle_turn": 133,
+        "sharp_turn": 51
+      }
+    },
+    "tug_service|15_20|high": {
+      "quota": 43,
+      "candidate_pool": 143,
+      "selected": 43,
+      "turn_counts": {
+        "straight": 122,
+        "gentle_turn": 17,
+        "sharp_turn": 4
+      }
+    },
+    "tug_service|5_10|mid": {
+      "quota": 76,
+      "candidate_pool": 442,
+      "selected": 76,
+      "turn_counts": {
+        "straight": 285,
+        "gentle_turn": 124,
+        "sharp_turn": 33
+      }
+    },
+    "tug_service|0_5|low": {
+      "quota": 166,
+      "candidate_pool": 996,
+      "selected": 145,
+      "turn_counts": {
+        "gentle_turn": 203,
+        "straight": 674,
+        "sharp_turn": 119
+      }
+    },
+    "tug_service|0_5|high": {
+      "quota": 158,
+      "candidate_pool": 948,
+      "selected": 115,
+      "turn_counts": {
+        "straight": 790,
+        "sharp_turn": 81,
+        "gentle_turn": 77
+      }
+    },
+    "tug_service|5_10|low": {
+      "quota": 23,
+      "candidate_pool": 41,
+      "selected": 14,
+      "turn_counts": {
+        "gentle_turn": 10,
+        "straight": 25,
+        "sharp_turn": 6
+      }
+    },
+    "fishing|10_15|high": {
+      "quota": 498,
+      "candidate_pool": 2988,
+      "selected": 498,
+      "turn_counts": {
+        "straight": 2819,
+        "gentle_turn": 152,
+        "sharp_turn": 17
+      }
+    },
+    "fishing|5_10|low": {
+      "quota": 29,
+      "candidate_pool": 62,
+      "selected": 11,
+      "turn_counts": {
+        "straight": 43,
+        "gentle_turn": 13,
+        "sharp_turn": 6
+      }
+    },
+    "cargo_tanker|gt20|high": {
+      "quota": 136,
+      "candidate_pool": 816,
+      "selected": 125,
+      "turn_counts": {
+        "gentle_turn": 28,
+        "straight": 788
+      }
+    },
+    "passenger_ferry|10_15|mid": {
+      "quota": 17,
+      "candidate_pool": 20,
+      "selected": 6,
+      "turn_counts": {
+        "straight": 13,
+        "gentle_turn": 7
+      }
+    },
+    "passenger_ferry|gt20|high": {
+      "quota": 348,
+      "candidate_pool": 2088,
+      "selected": 40,
+      "turn_counts": {
+        "straight": 1996,
+        "gentle_turn": 77,
+        "sharp_turn": 15
+      }
+    },
+    "other_unknown|10_15|low": {
+      "quota": 17,
+      "candidate_pool": 20,
+      "selected": 5,
+      "turn_counts": {
+        "straight": 13,
+        "sharp_turn": 3,
+        "gentle_turn": 4
+      }
+    },
+    "sailing_leisure|10_15|mid": {
+      "quota": 35,
+      "candidate_pool": 91,
+      "selected": 35,
+      "turn_counts": {
+        "gentle_turn": 34,
+        "straight": 41,
+        "sharp_turn": 16
+      }
+    },
+    "other_unknown|gt20|mid": {
+      "quota": 1,
+      "candidate_pool": 1,
+      "selected": 1,
+      "turn_counts": {
+        "straight": 1
+      }
+    },
+    "sailing_leisure|5_10|low": {
+      "quota": 34,
+      "candidate_pool": 89,
+      "selected": 34,
+      "turn_counts": {
+        "sharp_turn": 32,
+        "gentle_turn": 31,
+        "straight": 26
+      }
+    },
+    "other_unknown|15_20|mid": {
+      "quota": 2,
+      "candidate_pool": 2,
+      "selected": 1,
+      "turn_counts": {
+        "sharp_turn": 1,
+        "gentle_turn": 1
+      }
+    },
+    "tug_service|10_15|mid": {
+      "quota": 5,
+      "candidate_pool": 5,
+      "selected": 4,
+      "turn_counts": {
+        "straight": 4,
+        "gentle_turn": 1
+      }
+    },
+    "passenger_ferry|5_10|low": {
+      "quota": 27,
+      "candidate_pool": 56,
+      "selected": 8,
+      "turn_counts": {
+        "straight": 32,
+        "sharp_turn": 6,
+        "gentle_turn": 18
+      }
+    },
+    "cargo_tanker|5_10|low": {
+      "quota": 22,
+      "candidate_pool": 37,
+      "selected": 22,
+      "turn_counts": {
+        "gentle_turn": 8,
+        "straight": 28,
+        "sharp_turn": 1
+      }
+    },
+    "fishing|10_15|mid": {
+      "quota": 2,
+      "candidate_pool": 2,
+      "selected": 1,
+      "turn_counts": {
+        "straight": 2
+      }
+    },
+    "sailing_leisure|10_15|low": {
+      "quota": 14,
+      "candidate_pool": 15,
+      "selected": 6,
+      "turn_counts": {
+        "straight": 10,
+        "sharp_turn": 1,
+        "gentle_turn": 4
+      }
+    },
+    "cargo_tanker|10_15|mid": {
+      "quota": 5,
+      "candidate_pool": 5,
+      "selected": 3,
+      "turn_counts": {
+        "straight": 4,
+        "gentle_turn": 1
+      }
+    },
+    "other_unknown|15_20|low": {
+      "quota": 1,
+      "candidate_pool": 1,
+      "selected": 0,
+      "turn_counts": {
+        "sharp_turn": 1
+      }
+    },
+    "fishing|15_20|high": {
+      "quota": 36,
+      "candidate_pool": 100,
+      "selected": 33,
+      "turn_counts": {
+        "straight": 88,
+        "gentle_turn": 7,
+        "sharp_turn": 5
+      }
+    },
+    "passenger_ferry|10_15|low": {
+      "quota": 1,
+      "candidate_pool": 1,
+      "selected": 0,
+      "turn_counts": {
+        "straight": 1
+      }
+    },
+    "sailing_leisure|15_20|mid": {
+      "quota": 2,
+      "candidate_pool": 2,
+      "selected": 1,
+      "turn_counts": {
+        "straight": 2
+      }
+    }
+  }
+}

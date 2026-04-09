@@ -1,0 +1,16 @@
+{
+  "sample_id": "200000000_000001_r00_c00_00000",
+  "mmsi": 200000000,
+  "segment_id": "200000000_000001_r00_c00",
+  "ship_type": "fishing",
+  "ship_class": "fishing",
+  "quality_tier": "core",
+  "hist_end_ts": "2025-09-01T10:45:20+00:00",
+  "pred_end_ts": "2025-09-01T10:55:20+00:00",
+  "interp_ratio_total": 0.0,
+  "grid_interp_ratio_total": 1.0,
+  "hist_displacement_m": 1705.0651990070642,
+  "fut_displacement_m": 1758.5063267364153,
+  "nearby_ship_count_at_hist_end": 0,
+  "nearby_segment_ids": []
+}
