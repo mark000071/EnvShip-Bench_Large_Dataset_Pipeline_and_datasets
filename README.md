@@ -2,6 +2,12 @@
 
 Ship-Env is the public code release for *EnvShip-Bench: An Environment-Enhanced Benchmark for Short-Term Vessel Trajectory Prediction*. It contains the preprocessing pipeline used to turn raw AIS messages into benchmark-ready trajectory windows, together with compact releases, preview shards, visualization utilities, and paper support material.
 
+Resources:
+
+- Dataset: <https://huggingface.co/datasets/mark000071/EnvShip-Bench_An_Environment-Enhanced_Benchmark_for_Short-Term_Vessel_Trajectory_Prediction>
+- Citation: `CITATION.cff`
+- License: `LICENSE`
+
 All released benchmarks follow one forecasting protocol:
 
 - observation horizon: 10 minutes
